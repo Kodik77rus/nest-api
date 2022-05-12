@@ -15,13 +15,8 @@ import { UserService } from './user.service';
 export class UserController {
   constructor(private readonly service: UserService) {}
 
-  @Put(':id/token')
-  async updateToken(@Param('id') userId: string) {
-    return await this.service.updateToken(userId);
-  }
-
-  @Get(':id')
-  async find(@Param('id') userId: string) {
+  @Get(':name')
+  async find(@Param('name') userId: string) {
     return await this.service.find(userId);
   }
 
@@ -30,12 +25,12 @@ export class UserController {
     return await this.service.create(user);
   }
 
-  @Put(':id')
-  async update(@Param('id') id: string, @Body() user: UpdateUserDto) {
+  @Put(':name')
+  async update(@Param('name') id: string, @Body() user: UpdateUserDto) {
     return await this.service.update(id, user);
   }
 
-  @Delete(':id')
+  @Delete(':name')
   async delete(@Param('name') name: string) {
     return await this.service.delete(name);
   }
