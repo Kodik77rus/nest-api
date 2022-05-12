@@ -22,4 +22,10 @@ export class AppConfigService {
   get dbport(): number {
     return Number(this.configService.get<number>('app-config.database.port'));
   }
+  get jwtSecret(): string {
+    return this.configService.get<string>('app-config.jwt.jwtSecret');
+  }
+  get tokenLifetime(): string {
+    return this.configService.get<string>('app-config.jwt.jwtExpiresIn');
+  }
 }
