@@ -16,6 +16,17 @@ export class UserService {
     @InjectModel(UserModel.name) private readonly model: Model<UserDocument>,
   ) {}
 
+  async updateToken(name: string) {
+    const uptatedUser: User = {
+      name,
+    };
+
+    await this.model.findOneAndUpdate(
+      { name },
+      { token: this.cryptoService.generateAcсessToken(uptatedUser) },
+    );
+  }
+
   async find(name: string): Promise<User> {
     const user = await this.model.findOne({ name });
     if (!user) {

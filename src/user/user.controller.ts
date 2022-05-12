@@ -7,15 +7,18 @@ import {
   Post,
   Put,
   UseGuards,
+  UseInterceptors,
 } from '@nestjs/common';
 
 import { UserService } from './user.service';
 import { JwtAuthGuard } from '../auth/jwt-auth-guard';
+import { RefresTokenInterceptor } from '../auth/auth.interceptor';
 
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 
 @Controller('user')
+@UseInterceptors(RefresTokenInterceptor)
 export class UserController {
   constructor(private readonly service: UserService) {}
 

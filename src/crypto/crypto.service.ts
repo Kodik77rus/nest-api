@@ -2,7 +2,8 @@ import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcryptjs';
 
-import { CreateUserDto as UserDto } from 'src/user/dto/create-user.dto';
+import { CreateUserDto as UserDto } from '../user/dto/create-user.dto';
+import { User } from '../user/entities/user.entities';
 
 @Injectable()
 export class CryptoService {
@@ -10,7 +11,7 @@ export class CryptoService {
 
   private salt = bcrypt.genSaltSync(7);
 
-  generateAcсessToken(data: UserDto) {
+  generateAcсessToken(data: UserDto | User) {
     const payload = { name: data.name };
     return this.jwtservice.sign(payload);
   }
