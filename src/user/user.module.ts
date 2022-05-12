@@ -10,10 +10,12 @@ import { User, UserSchema } from './schemas/user.schema';
 @Module({
   imports: [
     CryptoModule,
-    MongooseModule.forFeature([{ name: User.name, schema: UserSchema }]),
+    MongooseModule.forFeature([
+      { name: User.name, schema: UserSchema, collection: 'Users' },
+    ]),
   ],
   controllers: [UserController],
-  providers: [UserService],
-  exports: [UserService],
+  providers: [UserService, MongooseModule],
+  exports: [UserService, MongooseModule],
 })
 export class UserModule {}
