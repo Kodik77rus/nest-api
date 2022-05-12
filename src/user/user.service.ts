@@ -4,7 +4,7 @@ import { Model } from 'mongoose';
 
 import { CryptoService } from '../crypto/crypto.service';
 
-import { UserDocument } from './schemas/user.schema';
+import { User as UserModel, UserDocument } from './schemas/user.schema';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { User } from './entities/user.entities';
@@ -13,7 +13,7 @@ import { User } from './entities/user.entities';
 export class UserService {
   constructor(
     private readonly cryptoService: CryptoService,
-    @InjectModel(User.name) private readonly model: Model<UserDocument>,
+    @InjectModel(UserModel.name) private readonly model: Model<UserDocument>,
   ) {}
 
   async find(name: string): Promise<User> {
