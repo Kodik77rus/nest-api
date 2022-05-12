@@ -15,6 +15,10 @@ export class CryptoService {
     return this.jwtservice.sign(payload);
   }
 
+  verifyToken(token: string) {
+    return this.jwtservice.verify(token);
+  }
+
   hashData(data: string) {
     return bcrypt.hashSync(data, this.salt);
   }
