@@ -16,11 +16,12 @@ export class UserService {
     @InjectModel(User.name) private readonly model: Model<UserDocument>,
   ) {}
 
-  async find(name): Promise<User> {
+  async find(name: string): Promise<User> {
     const user = await this.model.findOne({ name });
     if (!user) {
       throw new NotFoundException('User Not Found');
     }
+
     return user;
   }
 
@@ -30,20 +31,23 @@ export class UserService {
       password: this.cryptoService.hashData(user.password),
       token: this.cryptoService.generateAcсessToken(user),
     };
+
     return (await new this.model(newUser).save()).token;
   }
 
-  async update(name: string, userData: UpdateUserDto): Promise<User> {
+  async update(name: string, userData: UpdateUserDto | User): Promise<User> {
     if (userData.password) {
       userData = {
         ...userData,
         password: this.cryptoService.hashData(userData.password),
       };
     }
+
     const user = await this.model.findOneAndUpdate({ name }, userData);
     if (!user) {
       throw new NotFoundException('User Not Found');
     }
+
     return user;
   }
 

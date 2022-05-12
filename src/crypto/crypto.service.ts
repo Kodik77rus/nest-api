@@ -19,7 +19,7 @@ export class CryptoService {
     return bcrypt.hashSync(data, this.salt);
   }
 
-  isValidHash(data, data2) {
-    return bcrypt.compareSync(data, data2);
+  isValidHash(data: string, filter: string) {
+    return bcrypt.compareSync(data, filter);
   }
 }
